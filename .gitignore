@@ -1,0 +1,6 @@
+/opensbi/
+/u-boot/
+/fw_jump.bin
+/fw_dynamic.bin
+/Image
+/*.qcow2
