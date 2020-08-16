@@ -95,7 +95,7 @@ next release.
 ## Images
 
 The images downloaded are built using the `bootstrap.sh` script in this repo. These
-installations are meant to be small and a quite opinionated. As an example they
+installations are meant to be small and are quite opinionated. As an example they
 use `systemd-networkd` to manage the network rather than the usual `networkmanager` or
 `ifupdown` scripts. So don't worry if they feel "alien", it has nothing to do 
 with RISC-V. You can just download the regular but much larger distro-built images
