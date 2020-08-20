@@ -28,6 +28,7 @@ c := ,
 
 CP = cp
 RM_RF = rm -rf
+CHMOD = chmod
 GIT = git
 SSH = ssh
 SHELLCHECK = shellcheck
@@ -91,6 +92,7 @@ endif
 run: rawhide
 
 ssh:
+	$Q$(CHMOD) 0600 $(SSH_KEY)
 	$Q$(SSH) -p $(SSH_PORT) -i $(SSH_KEY) -o StrictHostKeyChecking=no $(SSH_USER)@$(SSH_HOST)
 
 download: fw_jump.bin Image rawhide-rv64.qcow2 sid-rv64.qcow2
