@@ -39,6 +39,7 @@ hostname="${distro}-rv64"
 password='$5$PasswordIs123$tBHaACgKswy0l2YDAmbPdQDaNofCA90AZgdc3waeHV0'
 rootfs=btrfs
 rootmnt=/mnt
+locale='en_US.UTF-8'
 
 pkg_install=(
   sudo
@@ -172,7 +173,7 @@ rawhide)
   readonly repo='rawhide-riscv-koji'
   pkg_install+=(
     systemd-udev
-    glibc-langpack-da
+    glibc-langpack-${locale%%_*}
     passwd
     vim-enhanced
     iproute
@@ -325,6 +326,11 @@ sid)
     echo 'export LC_ALL=C'
     echo 'export DEBIAN_FRONTEND=noninteractive'
 
+    echo '{'
+    echo "  echo 'locales locales/locales_to_be_generated multiselect $locale ${locale##*.}'"
+    echo "  echo 'locales locales/default_environment_locale select $locale'"
+    echo '} | debconf-set-selections'
+
     echo 'apt-get -y update'
 
     echo 'mkdir /tmp/fake'
@@ -414,7 +420,7 @@ sed -i \
   "$dest/etc/systemd/journald.conf"
 
 install -o root -g root -m644 /dev/stdin "$dest/etc/locale.conf" <<EOF
-LANG=da_DK.UTF-8
+LANG=$locale
 LC_COLLATE=C
 LC_MESSAGES=C
 EOF
