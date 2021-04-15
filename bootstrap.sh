@@ -45,7 +45,6 @@ pkg_install=(
   sudo
   man-db
   findutils
-  htop
   openssh-server
 )
 systemd_mask=(
@@ -173,6 +172,7 @@ rawhide)
   readonly repo='rawhide-riscv-koji'
   pkg_install+=(
     systemd-udev
+    systemd-networkd
     glibc-langpack-${locale%%_*}
     passwd
     vim-enhanced
@@ -199,6 +199,7 @@ rawhide)
       --assumeyes \
       --setopt='install_weak_deps=False' \
       --installroot="$dest" \
+      --releasever=rawhide \
       --disablerepo='*' \
       --enablerepo="$repo" \
       install "${pkg_install[@]}"
@@ -269,6 +270,7 @@ sid)
   pkg_install+=(
     udev
     locales
+    dbus-broker
     dbus-user-session
     deborphan
     libnss-resolve
